@@ -26,7 +26,8 @@ def get_details(response):
         my_json['company_summary'] = "NA"
 
     try:
-        my_json['company_tags'] = ", ".join(response.css("ul.summary__tags > li.summary__tag a.craft-tag::text").getall())
+        my_json['company_tags'] = ", ".join(
+            response.css("ul.summary__tags > li.summary__tag a.craft-tag::text").getall())
     except:
         my_json['company_tags'] = "NA"
 
@@ -65,11 +66,56 @@ def get_details(response):
         pass
 
     try:
-        company_name = response.css("")
+        social_links = response.css("li.craft-social-links__item")[:5]
+        socials = {}
+        for link in social_links:
+            social_media = link.css("a.craft-social-links__link::attr(href)").get().split(".")[1]
+            if "/" in social_media:
+                social_media = link.css("a.craft-social-links__link::attr(href)").get().split("/")[-2].split(".")[0]
+
+            social_media_url = link.css(" a.craft-social-links__link::attr(href)").get()
+
+            socials[social_media] = social_media_url
+        my_json["social_links"] = socials
     except:
         pass
 
     try:
-        company_name = response.css("")
+        key_people = response.css("div.key-people__item")
+        key_people_lst = []
+        for person in key_people:
+            person_name = person.css("div.key-people__info > h3.key-people__name::text").get()
+            person_position = person.css("div.key-people__info > div.key-people__position::text").get()
+            person_social_media = person.css(
+                "div.key-people__info > div.key-people__social-links a.key-people__social-link::attr(href)").get()
+            person_photo = person.css("div.key-people__picture-container > img.key-people__picture::attr(src)").get()
+
+            key_people_lst.append({
+                "name": person_name,
+                "position": person_position,
+                "social_media": person_social_media,
+                "photo": person_photo
+            })
+
+        my_json['key_people'] = key_people_lst
     except:
         pass
+
+    try:
+        office_locations = response.css("div.cp-locations__list-block")
+        locations = []
+        for location in office_locations:
+            location_name = location.css("div.cp-locations__list-title > span::text").get()
+            address = location.css("div.cp-locations__list-address::text").get()
+            locations.append({
+                "location_name": location_name,
+                "location_address": address
+            })
+
+        my_json['office_locations'] = locations
+    except:
+        pass
+
+
+
+    return my_json
