@@ -36,7 +36,7 @@ def get_details(response):
             table_title = table_row.css("td.summary__overview-table-label-cell::text").get()
 
             if table_title == "Website":
-                table_value = table_row.css("td.summary__overview-table-content-cell a.craft-link::text").get()
+                table_value = table_row.css("td.summary__overview-table-content-cell a.craft-link::attr(href)").get()
 
             if table_title == "HQ":
                 table_title = "Head Quarters"
