@@ -1,5 +1,6 @@
 # """
 #
+# FROM TERMINAL INSTALL MODULE cloudscraper WITH pip install cloudscraper
 # TO RUN CODE FROM PYCHARM, TAP THE RUN BUTTON
 # TO RUN FROM TERMINAL, OPEN TERMINAL AND NAVIGATE TO THE DIRECTORY WHERE THE FILE IS STORED
 # EXAMPLE: C:\Users\JEANNOEL\PycharmProjects\craftbot
@@ -17,16 +18,8 @@
 # """
 # comment
 
-
 import cloudscraper
 from scrapy import Selector
-from selenium import webdriver
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.support.wait import WebDriverWait
-
 from details import get_details
 import json
 from time import sleep
