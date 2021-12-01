@@ -1,5 +1,4 @@
 def get_details(response):
-    response.css("")
     my_json = {}
     try:
         my_json['company_name'] = response.css("h1.summary__company-name::text").get()
@@ -26,10 +25,10 @@ def get_details(response):
         my_json['company_summary'] = "NA"
 
     try:
-        my_json['company_tags'] = ", ".join(
+        my_json['company_industry'] = ", ".join(
             response.css("ul.summary__tags > li.summary__tag a.craft-tag::text").getall())
     except:
-        my_json['company_tags'] = "NA"
+        my_json['company_industry'] = "NA"
 
     try:
         my_table = response.css("table.summary__overview-table > tbody tr.summary__overview-table-row")
@@ -38,6 +37,9 @@ def get_details(response):
 
             if table_title == "Website":
                 table_value = table_row.css("td.summary__overview-table-content-cell a.craft-link::text").get()
+
+            if table_title == "HQ":
+                table_title = "Head Quarters"
 
             elif table_title == "Employee Ratings":
                 table_value = table_row.css(
@@ -88,7 +90,7 @@ def get_details(response):
             person_position = person.css("div.key-people__info > div.key-people__position::text").get()
             person_social_media = person.css(
                 "div.key-people__info > div.key-people__social-links a.key-people__social-link::attr(href)").get()
-            person_photo = person.css("div.key-people__picture-container > img.key-people__picture::attr(src)").get()
+            person_photo = person.css("div.key-people__picture-container img.key-people__picture::attr(src)").get()
 
             key_people_lst.append({
                 "name": person_name,
