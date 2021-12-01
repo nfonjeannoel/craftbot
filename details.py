@@ -35,10 +35,10 @@ def get_details(response):
         for table_row in my_table:
             table_title = table_row.css("td.summary__overview-table-label-cell::text").get()
 
-            if table_title == "Website":
-                table_value = table_row.css("td.summary__overview-table-content-cell a.craft-link::attr(href)").get()
+            if "Website" in table_title:
+                table_value = table_row.css(".summary__overview-table-content-cell > a::attr(href)").get()
 
-            if table_title == "HQ":
+            elif table_title == "HQ":
                 table_title = "Head Quarters"
 
             elif table_title == "Employee Ratings":
