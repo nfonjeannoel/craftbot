@@ -45,9 +45,29 @@ def small_sleep(param):
 
 if __name__ == '__main__':
     endpoint_text = input("enter company name eg. slack, tesla: -  ")
-    body = fetch_html(endpoint_text)
-    html = body
-    response_text = Selector(text=html)
-    website_details = get_details(response_text)
+    body = ""
+    counter = 0
+    website_details = ""
+    while "summary__company-name" not in body:
+        counter += 1
 
-    save_results(website_details, endpoint_text)
+        try:
+            body = fetch_html(endpoint_text)
+        except:
+            print("error in fetching body")
+            body = ""
+
+        if "summary__company-name" in body:
+            body = Selector(text=body)
+            website_details = get_details(body)
+            print(website_details)
+            save_results(website_details, endpoint_text)
+            print(f"complete: file saved as {endpoint_text}")
+            break
+
+        else:
+            print(f"error, retrying {counter} of 50 times")
+
+        if counter == 51:
+            print("unable to scrape data, please try later")
+            break

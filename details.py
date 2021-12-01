@@ -2,8 +2,10 @@ def get_details(response):
     my_json = {}
     try:
         my_json['company_name'] = response.css("h1.summary__company-name::text").get()
+        print( my_json['company_name'])
     except:
         my_json['company_name'] = "NA"
+        print("error with company nam,e")
 
     try:
         matrices = response.css(".summary__top-metric-link")
@@ -17,6 +19,7 @@ def get_details(response):
             }
 
     except:
+        print("error with matrices")
         pass
 
     try:
@@ -65,6 +68,7 @@ def get_details(response):
 
             my_json[table_title] = table_value
     except:
+        print("error with my_table")
         pass
 
     try:
@@ -80,6 +84,7 @@ def get_details(response):
             socials[social_media] = social_media_url
         my_json["social_links"] = socials
     except:
+        print("error with social_links")
         pass
 
     try:
@@ -101,6 +106,7 @@ def get_details(response):
 
         my_json['key_people'] = key_people_lst
     except:
+        print("error with key_people")
         pass
 
     try:
@@ -116,8 +122,7 @@ def get_details(response):
 
         my_json['office_locations'] = locations
     except:
+        print("error with office_locations")
         pass
-
-
 
     return my_json
