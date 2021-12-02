@@ -3,7 +3,7 @@ def get_details(response):
     try:
         x = my_json['company_name'] = response.css("h1.summary__company-name::text").get()
         if x is None:
-            my_json['company_name'] = response.css("h1.cp - summary__company - name::text").get()
+            my_json['company_name'] = response.css("h1.cp-summary__company-name::text").get()
             x = None
     except:
         my_json['company_name'] = "NA"
@@ -39,6 +39,7 @@ def get_details(response):
         if x is None:
             my_json['company_industry'] = ", ".join(
                 response.css(".btn-default::text").getall())
+            x = None
     except:
         my_json['company_industry'] = "NA"
 
