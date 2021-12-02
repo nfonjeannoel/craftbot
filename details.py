@@ -1,8 +1,10 @@
 def get_details(response):
     my_json = {}
     try:
-        my_json['company_name'] = response.css("h1.summary__company-name::text").get()
-        print( my_json['company_name'])
+        x = my_json['company_name'] = response.css("h1.summary__company-name::text").get()
+        if x is None:
+            my_json['company_name'] = response.css("h1.cp - summary__company - name::text").get()
+            x = None
     except:
         my_json['company_name'] = "NA"
         print("error with company nam,e")
@@ -23,7 +25,9 @@ def get_details(response):
         pass
 
     try:
-        my_json['company_summary'] = response.css("div.summary__description div ::text").get()
+        x = my_json['company_summary'] = response.css("div.summary__description div ::text").get()
+        if x is None:
+            my_json['company_summary'] = " ".join(response.css("p::text").getall())
     except:
         my_json['company_summary'] = "NA"
 
