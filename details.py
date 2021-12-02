@@ -28,12 +28,17 @@ def get_details(response):
         x = my_json['company_summary'] = response.css("div.summary__description div ::text").get()
         if x is None:
             my_json['company_summary'] = " ".join(response.css("p::text").getall())
+            x = None
     except:
         my_json['company_summary'] = "NA"
 
     try:
-        my_json['company_industry'] = ", ".join(
+        x = my_json['company_industry'] = ", ".join(
             response.css("ul.summary__tags > li.summary__tag a.craft-tag::text").getall())
+
+        if x is None:
+            my_json['company_industry'] = ", ".join(
+                response.css(".btn-default::text").getall())
     except:
         my_json['company_industry'] = "NA"
 
