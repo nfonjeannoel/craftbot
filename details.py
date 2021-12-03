@@ -37,7 +37,7 @@ def get_details(response, url):
         x = my_json['company_industry'] = ", ".join(
             response.css("ul.summary__tags > li.summary__tag a.craft-tag::text").getall())
 
-        if x is None:
+        if Len(x) < 3:
             my_json['company_industry'] = ", ".join(
                 response.css(".cp-summary__tag::text").getall())
             x = None
