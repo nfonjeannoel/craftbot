@@ -1,5 +1,6 @@
-def get_details(response):
+def get_details(response, url):
     my_json = {}
+    my_json['page_url'] = url
     try:
         x = my_json['company_name'] = response.css("h1.summary__company-name::text").get()
         if x is None:
@@ -38,7 +39,7 @@ def get_details(response):
 
         if x is None:
             my_json['company_industry'] = ", ".join(
-                response.css(".btn-default::text").getall())
+                response.css(".cp-summary__tag::text").getall())
             x = None
     except:
         my_json['company_industry'] = "NA"

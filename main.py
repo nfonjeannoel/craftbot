@@ -29,7 +29,8 @@ DRIVER_PATH = 'C:/Users/JEANNOEL/Desktop/selenium/chromedriver.exe'
 
 def fetch_html(endpoint):
     scraper = cloudscraper.create_scraper()  # returns a CloudScraper instance
-    return str(scraper.get(f"https://craft.co/{endpoint}").text.encode("utf-8"))
+    url = f"https://craft.co/{endpoint}"
+    return str(scraper.get(url).text.encode("utf-8")), url
 
 
 def save_results(my_json, file_name):
@@ -52,14 +53,14 @@ if __name__ == '__main__':
         counter += 1
 
         try:
-            body = fetch_html(endpoint_text)
+            body, page_url = fetch_html(endpoint_text)
         except:
             print("error in fetching body")
             body = ""
 
         if "summary__company-name" in body:
             body = Selector(text=body)
-            website_details = get_details(body)
+            website_details = get_details(body, page_url)
             print(website_details)
             save_results(website_details, endpoint_text)
             print(f"complete: file saved as {endpoint_text}")
