@@ -9,7 +9,7 @@ def get_details(response, url):
     except:
         my_json['company_name'] = "NA"
         print("error with company nam,e")
-
+# f
     try:
         matrices = response.css(".summary__top-metric-link")
         for matrix in matrices:
