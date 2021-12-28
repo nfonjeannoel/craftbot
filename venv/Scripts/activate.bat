@@ -1,5 +1,9 @@
 @echo off
 
+SET "MONGO_LOCAL=mongodb://localhost:27017"
+SET "MONGO_REMOTE=mongodb://data:datascientistzxcv@54.164.182.183:27017/assignments?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false"
+SET "HOST=localhost"
+
 rem This file is UTF-8 encoded, so we need to update the current code page while executing it
 for /f "tokens=2 delims=:." %%a in ('"%SystemRoot%\System32\chcp.com"') do (
     set _OLD_CODEPAGE=%%a

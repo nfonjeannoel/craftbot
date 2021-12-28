@@ -1,6 +1,7 @@
 def get_details(response, url):
-    my_json = {}
-    my_json['page_url'] = url
+    my_json = {'page_url': url, "Website": "", "HQ": ""}
+
+    # initialise must use variables
     try:
         x = my_json['company_name'] = response.css("h1.summary__company-name::text").get()
         if x is None:
@@ -9,7 +10,7 @@ def get_details(response, url):
     except:
         my_json['company_name'] = "NA"
         print("error with company nam,e")
-# f
+    # f
     try:
         matrices = response.css(".summary__top-metric-link")
         for matrix in matrices:
@@ -37,7 +38,7 @@ def get_details(response, url):
         x = my_json['company_industry'] = ", ".join(
             response.css("ul.summary__tags > li.summary__tag a.craft-tag::text").getall())
 
-        if Len(x) < 3:
+        if len(x) < 3:
             my_json['company_industry'] = ", ".join(
                 response.css(".cp-summary__tag::text").getall())
             x = None
@@ -52,8 +53,8 @@ def get_details(response, url):
             if "Website" in table_title:
                 table_value = table_row.css(".summary__overview-table-content-cell > a::attr(href)").get()
 
-            elif table_title == "HQ":
-                table_title = "Head Quarters"
+            # elif table_title == "HQ":
+            #     table_title = "Head Quarters"
 
             elif table_title == "Employee Ratings":
                 table_value = table_row.css(

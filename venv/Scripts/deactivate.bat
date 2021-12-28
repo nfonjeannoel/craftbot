@@ -1,5 +1,10 @@
 @echo off
 
+SET MONGO_LOCAL=
+SET MONGO_REMOTE=
+SET HOST=
+
+
 if defined _OLD_VIRTUAL_PROMPT (
     set "PROMPT=%_OLD_VIRTUAL_PROMPT%"
 )

@@ -1,14 +1,27 @@
-from scrapy import Selector
+import json
+from urllib.parse import urljoin
 
-with open("myhtml.txt") as f:
-    file = f.read()
-response = Selector(text=file)
+import cloudscraper
 
-office_locations = response.css("div.cp-locations__list-block")
-for location in office_locations:
-    location_name = location.css("div.cp-locations__list-title > span::text").get()
-    address = location.css("div.cp-locations__list-address::text").get()
-
-
-
-    print(f"{location_name} - {address} ")
+# scraper = cloudscraper.create_scraper()
+# url = "https://craft.co/search?layout=list&order=relevance&q=mit"
+# data = scraper.get(url).text
+# print(data)
+# from scrapy import Selector
+#
+# with open("test.txt", "r") as f:
+#     response = f.read()
+# # print(response)
+# response = Selector(text=response)
+#
+# cards = response.css("._2US_W")
+# for card in cards:
+#     url = card.css("._3egN7 ::attr(href)").get()
+#     print(url)
+# with open("companies.txt", "r") as f:
+#     myjson = f.read()
+#     myjson = json.loads(myjson)
+#     print(type(myjson))
+import urllib.parse
+safe_string = urllib.parse.quote_plus("hey there, i am good")
+print(safe_string)
