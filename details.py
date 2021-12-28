@@ -120,7 +120,7 @@ def get_details(response, url):
     except:
         print("error with key_people")
         pass
-
+    # lol
     try:
         office_locations = response.css("div.cp-locations__list-block")
         locations = []
